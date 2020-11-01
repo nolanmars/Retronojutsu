@@ -4,6 +4,8 @@ clear
 
 loadkeys fr > /dev/null 2>&1
 
+# Sequence de test des pré-requis
+
 echo "UEFI"
 ls /sys/firmware/efi/efivars > /dev/null 2>&1
 if [ $? = 2 ]
@@ -22,9 +24,15 @@ if [ $? = 2 ]
 fi
 echo "OK"
 
+# Saisie des variables
+
+disk='/dev/sda'
+
+# Installation
+
 timedatectl set-ntp true
 
-fdisk -l /dev/sda > /dev/null 2>&1
+fdisk -l $disk > /dev/null 2>&1
 
 wipefs --all --force /dev/sda > /dev/null 2>&1
 
