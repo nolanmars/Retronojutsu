@@ -30,9 +30,9 @@ disk='/dev/sda'
 efipart='/dev/sda1'
 mainpart='/dev/sda2'
 hostname='retro-test'
-rootpasswd='wstmjqcg79'
-user='ultrasyd'
-userpasswd='wstmjqcg'
+rootpasswd='consolemul'
+user='sirjaguar'
+userpasswd='consolemul'
 
 # Installation
 
