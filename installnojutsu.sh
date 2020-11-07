@@ -64,7 +64,7 @@ arch-chroot /mnt /bin/bash <<EOF
 
 echo $hostname > /etc/hostname
 
-echo '127.0.1.1 $hostname.localdomain retromars' >> /etc/hosts
+echo '127.0.1.1 $hostname.localdomain $hostname' >> /etc/hosts
 
 echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen
 
