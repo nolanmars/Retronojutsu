@@ -34,13 +34,13 @@ timedatectl set-ntp true
 
 fdisk -l $disk > /dev/null 2>&1
 
-wipefs --all --force /dev/sda > /dev/null 2>&1
+wipefs --all --force $disk > /dev/null 2>&1
 
-sgdisk /dev/sda -o > /dev/null 2>&1
+sgdisk $disk -o > /dev/null 2>&1
 
-sgdisk /dev/sda -n 1::+512MiB -t 1:ef00 > /dev/null 2>&1
+sgdisk $disk -n 1::+512MiB -t 1:ef00 > /dev/null 2>&1
 
-sgdisk /dev/sda -n 2 > /dev/null 2>&1
+sgdisk $disk -n 2 > /dev/null 2>&1
 
 mkfs.vfat -F32 /dev/sda1 > /dev/null 2>&1
 
@@ -82,6 +82,6 @@ systemctl enable dhcpcd
 
 echo root:wstmjqcg79 | chpasswd
 
-efibootmgr --disk /dev/sda --part 1 --create --label "Arch Linux" --loader /vmlinuz-linux --unicode 'root=/dev/sda2 rw initrd=\initramfs-linux.img'
+efibootmgr --disk $disk --part 1 --create --label "Arch Linux" --loader /vmlinuz-linux --unicode 'root=/dev/sda2 rw initrd=\initramfs-linux.img'
 
 EOF
