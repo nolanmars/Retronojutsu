@@ -28,7 +28,7 @@ echo "OK"
 
 disk='/dev/sda'
 efipart='/dev/sda1'
-
+mainpart='/dev/sda2'
 
 # Installation
 
@@ -46,9 +46,9 @@ sgdisk $disk -n 2 > /dev/null 2>&1
 
 mkfs.vfat -F32 $efipart > /dev/null 2>&1
 
-mkfs.ext4 /dev/sda2 > /dev/null 2>&1
+mkfs.ext4 $mainpart > /dev/null 2>&1
 
-mount /dev/sda2 /mnt > /dev/null 2>&1
+mount $mainpart /mnt > /dev/null 2>&1
 
 mkdir /mnt/boot > /dev/null 2>&1
 
@@ -84,6 +84,6 @@ systemctl enable dhcpcd
 
 echo root:wstmjqcg79 | chpasswd
 
-efibootmgr --disk $disk --part 1 --create --label "Arch Linux" --loader /vmlinuz-linux --unicode 'root=/dev/sda2 rw initrd=\initramfs-linux.img'
+efibootmgr --disk $disk --part 1 --create --label "Arch Linux" --loader /vmlinuz-linux --unicode 'root=$mainpart rw initrd=\initramfs-linux.img'
 
 EOF
