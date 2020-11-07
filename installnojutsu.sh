@@ -29,6 +29,7 @@ echo "OK"
 disk='/dev/sda'
 efipart='/dev/sda1'
 mainpart='/dev/sda2'
+hostname='retro-test'
 
 # Installation
 
@@ -60,13 +61,13 @@ genfstab -U /mnt >> /mnt/etc/fstab > /dev/null 2>&1
 
 arch-chroot /mnt /bin/bash <<EOF
 
-echo retro-mars > /etc/hostname
+echo $hostname > /etc/hostname
 
-echo '127.0.1.1 retro-mars.localdomain retromars' >> /etc/hosts
+echo '127.0.1.1 $hostname.localdomain retromars' >> /etc/hosts
 
 echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen
 
-locale-gen
+locale-gen > /dev/null 2>&1
 
 echo LANG="fr_FR.UTF-8" > /etc/locale.conf
 
