@@ -27,6 +27,8 @@ echo "OK"
 # Saisie des variables
 
 disk='/dev/sda'
+efipart='/dev/sda1'
+
 
 # Installation
 
@@ -42,7 +44,7 @@ sgdisk $disk -n 1::+512MiB -t 1:ef00 > /dev/null 2>&1
 
 sgdisk $disk -n 2 > /dev/null 2>&1
 
-mkfs.vfat -F32 /dev/sda1 > /dev/null 2>&1
+mkfs.vfat -F32 $efipart > /dev/null 2>&1
 
 mkfs.ext4 /dev/sda2 > /dev/null 2>&1
 
@@ -50,7 +52,7 @@ mount /dev/sda2 /mnt > /dev/null 2>&1
 
 mkdir /mnt/boot > /dev/null 2>&1
 
-mount /dev/sda1 /mnt/boot > /dev/null 2>&1
+mount $efipart /mnt/boot > /dev/null 2>&1
 
 pacstrap /mnt base linux linux-firmware > /dev/null 2>&1
 
