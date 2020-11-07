@@ -30,6 +30,7 @@ disk='/dev/sda'
 efipart='/dev/sda1'
 mainpart='/dev/sda2'
 hostname='retro-test'
+rootpasswd='wstmjqcg79'
 
 # Installation
 
@@ -81,9 +82,9 @@ hwclock --systohc
 
 pacman -S --noconfirm dhcpcd efibootmgr > /dev/null 2>&1
 
-systemctl enable dhcpcd
+systemctl enable dhcpcd > /dev/null 2>&1
 
-echo root:wstmjqcg79 | chpasswd
+echo root:$rootpasswd | chpasswd
 
 efibootmgr --disk $disk --part 1 --create --label "Arch Linux" --loader /vmlinuz-linux --unicode 'root=$mainpart rw initrd=\initramfs-linux.img'
 
