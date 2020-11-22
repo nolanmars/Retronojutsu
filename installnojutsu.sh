@@ -26,6 +26,8 @@ echo "OK"
 
 # Saisie des variables
 
+echo "Installation"
+
 disk='/dev/sda'
 efipart='/dev/sda1'
 mainpart='/dev/sda2'
@@ -92,6 +94,22 @@ useradd -m $user
 
 echo $user:$userpasswd | chpasswd
 
-efibootmgr --disk $disk --part 1 --create --label "Arch Linux" --loader /vmlinuz-linux --unicode 'root=$mainpart rw initrd=\initramfs-linux.img'
+echo "OK"
+
+##################################################################################################################################
+# Kernel #
+##########
+
+mkdir kernelbuild
+
+cd kernelbuild
+
+curl https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.9.10.tar.xz -o linux.tar.xz
+
+unxz linux.tar.xz
+
+
+
+efibootmgr --disk $disk --part 1 --create --label "Consolemul" --loader /vmlinuz-linux --unicode 'root=$mainpart rw initrd=\initramfs-linux.img'
 
 EOF
