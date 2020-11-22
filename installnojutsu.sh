@@ -100,6 +100,8 @@ echo "OK"
 # Kernel #
 ##########
 
+pacman -S --noconfirm base-devel > /dev/null 2>&1
+
 mkdir kernelbuild
 
 cd kernelbuild
@@ -108,7 +110,11 @@ curl https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.9.10.tar.xz -o linux.t
 
 unxz linux.tar.xz
 
+tar -xvf linux.tar
 
+cd linux
+
+make mrproper
 
 efibootmgr --disk $disk --part 1 --create --label "Consolemul" --loader /vmlinuz-linux --unicode 'root=$mainpart rw initrd=\initramfs-linux.img'
 
