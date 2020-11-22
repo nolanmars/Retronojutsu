@@ -29,7 +29,7 @@ echo "OK"
 disk='/dev/sda'
 efipart='/dev/sda1'
 mainpart='/dev/sda2'
-hostname='retro-test'
+hostname='consolemul'
 rootpasswd='consolemul'
 user='sirjaguar'
 userpasswd='consolemul'
