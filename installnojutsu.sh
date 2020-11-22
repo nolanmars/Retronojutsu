@@ -92,8 +92,13 @@ useradd -m $user
 
 echo $user:$userpasswd | chpasswd
 
-echo '$user ALL=(ALL:ALL) ALL' >> /etc/sudoers
-
 efibootmgr --disk $disk --part 1 --create --label "Consolemul" --loader /vmlinuz-linux --unicode 'root=$mainpart rw initrd=\initramfs-linux.img'
+
+
+# Installation suite
+
+echo '$user ALL=(ALL:ALL) ALL' >> /etc/sudoers # Ajoute l'utilisateur à la lister des sudoers
+
+systemctl enable dropbear # Install le serveur SSH dropbear
 
 EOF
