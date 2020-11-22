@@ -92,6 +92,8 @@ useradd -m $user
 
 echo $user:$userpasswd | chpasswd
 
+echo '$user ALL=(ALL:ALL) ALL' >> /etc/sudoers
+
 efibootmgr --disk $disk --part 1 --create --label "Consolemul" --loader /vmlinuz-linux --unicode 'root=$mainpart rw initrd=\initramfs-linux.img'
 
 EOF
