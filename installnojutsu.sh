@@ -26,8 +26,6 @@ echo "OK"
 
 # Saisie des variables
 
-echo "Installation"
-
 disk='/dev/sda'
 efipart='/dev/sda1'
 mainpart='/dev/sda2'
@@ -93,30 +91,6 @@ echo root:$rootpasswd | chpasswd
 useradd -m $user
 
 echo $user:$userpasswd | chpasswd
-
-echo "OK"
-
-##################################################################################################################################
-# Kernel #
-##########
-
-echo "Kernel"
-
-pacman -S --noconfirm base-devel > /dev/null 2>&1
-
-mkdir kernelbuild
-
-cd kernelbuild
-
-curl https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.9.10.tar.xz -o linux.tar.xz
-
-unxz linux.tar.xz
-
-tar -xvf linux.tar
-
-cd linux
-
-make mrproper
 
 efibootmgr --disk $disk --part 1 --create --label "Consolemul" --loader /vmlinuz-linux --unicode 'root=$mainpart rw initrd=\initramfs-linux.img'
 
