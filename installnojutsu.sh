@@ -99,6 +99,8 @@ efibootmgr --disk $disk --part 1 --create --label "Consolemul" --loader /vmlinuz
 
 echo '$user ALL=(ALL:ALL) ALL' >> /etc/sudoers # Ajoute l'utilisateur à la lister des sudoers
 
-systemctl enable dropbear # Install le serveur SSH dropbear
+pacman -S --noconfirm dropbear > /dev/null 2>&1 # Installation du serveur SSH
+
+systemctl enable dropbear # Activer le service du serveur SSH dropbear
 
 EOF
