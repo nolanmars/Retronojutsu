@@ -100,6 +100,8 @@ echo "OK"
 # Kernel #
 ##########
 
+echo "Kernel"
+
 pacman -S --noconfirm base-devel > /dev/null 2>&1
 
 mkdir kernelbuild
