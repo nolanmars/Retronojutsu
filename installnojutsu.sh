@@ -48,11 +48,11 @@ sgdisk $disk -n 1::+512MiB -t 1:ef00
 
 sgdisk $disk -n 2
 
-mkfs.vfat -F32 $efipart >
+mkfs.vfat -F32 $efipart
 
 mkfs.ext4 $mainpart
 
-mount $mainpart /mnt >
+mount $mainpart /mnt
 
 mkdir /mnt/boot
 
@@ -70,7 +70,7 @@ echo '127.0.1.1 $hostname.localdomain $hostname' >> /etc/hosts
 
 echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen
 
-locale-gen > /dev/null 2>&1
+locale-gen
 
 echo LANG="fr_FR.UTF-8" > /etc/locale.conf
 
@@ -82,9 +82,9 @@ ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
 
 hwclock --systohc
 
-pacman -S --noconfirm dhcpcd efibootmgr > /dev/null 2>&1
+pacman -S --noconfirm dhcpcd efibootmgr
 
-systemctl enable dhcpcd > /dev/null 2>&1
+systemctl enable dhcpcd
 
 echo root:$rootpasswd | chpasswd
 
@@ -97,7 +97,7 @@ efibootmgr --disk $disk --part 1 --create --label "Consolemul" --loader /vmlinuz
 
 # Installation suite
 
-pacman -S --noconfirm dropbear sudo > /dev/null 2>&1 # Installation packages supplémentaires
+pacman -S --noconfirm dropbear sudo # Installation packages supplémentaires
 
 echo '$user ALL=(ALL:ALL) ALL' >> /etc/sudoers # Ajoute l'utilisateur à la lister des sudoers
 
