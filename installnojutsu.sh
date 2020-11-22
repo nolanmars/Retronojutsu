@@ -38,29 +38,29 @@ userpasswd='consolemul'
 
 timedatectl set-ntp true
 
-fdisk -l $disk > /dev/null 2>&1
+fdisk -l $disk
 
-wipefs --all --force $disk > /dev/null 2>&1
+wipefs --all --force $disk
 
-sgdisk $disk -o > /dev/null 2>&1
+sgdisk $disk -o > /dev/null
 
-sgdisk $disk -n 1::+512MiB -t 1:ef00 > /dev/null 2>&1
+sgdisk $disk -n 1::+512MiB -t 1:ef00
 
-sgdisk $disk -n 2 > /dev/null 2>&1
+sgdisk $disk -n 2
 
-mkfs.vfat -F32 $efipart > /dev/null 2>&1
+mkfs.vfat -F32 $efipart >
 
-mkfs.ext4 $mainpart > /dev/null 2>&1
+mkfs.ext4 $mainpart
 
-mount $mainpart /mnt > /dev/null 2>&1
+mount $mainpart /mnt >
 
-mkdir /mnt/boot > /dev/null 2>&1
+mkdir /mnt/boot
 
-mount $efipart /mnt/boot > /dev/null 2>&1
+mount $efipart /mnt/boot
 
-pacstrap /mnt base linux linux-firmware > /dev/null 2>&1
+pacstrap /mnt base linux linux-firmware
 
-genfstab -U /mnt >> /mnt/etc/fstab > /dev/null 2>&1
+genfstab -U /mnt >> /mnt/etc/fstab
 
 arch-chroot /mnt /bin/bash <<EOF
 
